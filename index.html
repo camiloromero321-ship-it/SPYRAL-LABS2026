@@ -1,1 +1,974 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spyral Labs - Desarrollo Blockchain & Tech Enterprise</title>
+    <!-- Fuente Premium: Outfit (Titulos) & Inter (Cuerpo) -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            /* Paleta Ultra-Premium Dark Mode */
+            --bg-body: #050507;
+            --bg-surface: #0f1016;
+            --bg-card: rgba(255, 255, 255, 0.02);
+            
+            --primary: #6366f1; /* Indigo vibrante */
+            --primary-dark: #4f46e5;
+            --accent: #10b981; /* Esmeralda */
+            
+            --text-main: #ffffff;
+            --text-secondary: #94a3b8; /* Gris azulado para lectura */
+            
+            --border-light: rgba(255, 255, 255, 0.06);
+            --border-hover: rgba(99, 102, 241, 0.3);
+            
+            --glass-blur: 12px;
+        }
 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 15% 15%, rgba(99, 102, 241, 0.06) 0%, transparent 45%),
+                radial-gradient(circle at 85% 60%, rgba(16, 185, 129, 0.04) 0%, transparent 45%);
+        }
+
+        h1, h2, h3, h4, .btn, .nav-link, .section-tag {
+            font-family: 'Outfit', sans-serif;
+        }
+
+        /* --- UTILITIES --- */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        /* Botones Pro */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 32px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid transparent;
+            letter-spacing: 0.5px;
+            gap: 10px;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.25);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            box-shadow: 0 6px 25px rgba(99, 102, 241, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-light);
+            color: var(--text-main);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-sm {
+            padding: 8px 20px;
+            font-size: 0.85rem;
+        }
+
+        /* --- TYPOGRAPHY --- */
+        h1 {
+            font-size: 4rem;
+            line-height: 1.1;
+            font-weight: 700;
+            letter-spacing: -1.5px;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(180deg, #fff 0%, #cbd5e1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        h2 {
+            font-size: 2.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            letter-spacing: -1px;
+            color: #fff;
+        }
+
+        p.subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 650px;
+            margin-bottom: 2rem;
+            font-weight: 300;
+            line-height: 1.8;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 70px;
+        }
+
+        .section-tag {
+            display: inline-block;
+            padding: 6px 14px;
+            border: 1px solid var(--border-light);
+            border-radius: 100px;
+            font-size: 0.8rem;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            margin-bottom: 24px;
+            font-weight: 600;
+            background: rgba(99, 102, 241, 0.08);
+        }
+
+        /* --- HEADER --- */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 20px 0;
+            transition: all 0.4s ease;
+            border-bottom: 1px solid transparent;
+        }
+
+        header.scrolled {
+            background: rgba(5, 5, 7, 0.9);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-light);
+            padding: 15px 0;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo img {
+            height: 45px;
+            width: auto;
+            border-radius: 8px; /* Opcional: suaviza las esquinas */
+        }
+
+        /* --- HERO --- */
+        .hero {
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding-top: 80px;
+        }
+
+        .hero-bg-glow {
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60vw;
+            height: 60vw;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.12) 0%, transparent 60%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* --- MARQUEE (LOGOS INFINITOS) --- */
+        .marquee-section {
+            padding: 50px 0;
+            border-top: 1px solid var(--border-light);
+            border-bottom: 1px solid var(--border-light);
+            background: rgba(255, 255, 255, 0.008);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .marquee-wrapper {
+            display: flex;
+            width: 100%;
+            overflow: hidden;
+            mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+        }
+
+        .marquee-track {
+            display: flex;
+            animation: scroll 40s linear infinite;
+            width: max-content;
+        }
+
+        .marquee-item {
+            padding: 0 50px;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Estilo para los logos reales */
+        .client-logo-img {
+            height: 60px; /* Aumentado para mejor visibilidad */
+            width: auto;
+            max-width: 180px;
+            object-fit: contain;
+            /* Filtro mejorado: Más brillo y menos contraste grisáceo */
+            filter: grayscale(100%) brightness(1.8) contrast(1.1);
+            opacity: 0.85;
+            transition: all 0.3s ease;
+        }
+
+        .client-logo-img:hover {
+            filter: none; /* Recupera el color original */
+            opacity: 1;
+            transform: scale(1.05);
+        }
+
+        /* Estilo simulado de logos con texto (para los que no son imágenes) */
+        .logo-text {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 800;
+            font-size: 1.4rem;
+            color: rgba(255, 255, 255, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            white-space: nowrap;
+            transition: color 0.3s;
+            cursor: default;
+        }
+        
+        .logo-text:hover {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* --- GRID SYSTEM --- */
+        section {
+            padding: 100px 0;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 30px;
+        }
+
+        /* --- CARDS --- */
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            padding: 40px 32px;
+            border-radius: 16px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .card:hover {
+            border-color: var(--border-hover);
+            background: rgba(255, 255, 255, 0.04);
+            transform: translateY(-5px);
+        }
+
+        .card-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(99, 102, 241, 0.1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 24px;
+        }
+
+        .card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+            color: #fff;
+        }
+
+        .card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            flex-grow: 1;
+        }
+
+        /* --- PROJECTS SECTION --- */
+        .project-card {
+            background: #0a0b10;
+            border: 1px solid var(--border-light);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .project-content {
+            padding: 30px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-tag {
+            font-size: 0.75rem;
+            /* CAMBIO: Color verde eliminado, ahora usa el color primario (púrpura/indigo) */
+            color: var(--primary); 
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .project-link {
+            margin-top: 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .project-link:hover {
+            color: var(--primary);
+        }
+
+        /* --- TEAM SECTION STYLES --- */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .team-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            padding: 40px;
+            border-radius: 16px;
+            text-align: center;
+            transition: 0.3s;
+        }
+        
+        .team-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .team-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: #222;
+            object-fit: cover;
+            border: 2px solid var(--primary);
+            margin: 0 auto 20px auto;
+            display: block;
+        }
+
+        .team-name {
+            color: #fff;
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .team-role {
+            color: var(--primary);
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: block;
+            margin-bottom: 12px;
+        }
+
+        .linkedin-link {
+            display: inline-block;
+            color: var(--text-secondary);
+            font-size: 1.4rem;
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        .linkedin-link:hover {
+            color: #0077b5; /* LinkedIn Blue */
+            transform: scale(1.1);
+        }
+
+        /* --- CONTACT --- */
+        .contact-section {
+            background: linear-gradient(180deg, var(--bg-body) 0%, #08080c 100%);
+        }
+
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .form-box {
+            background: rgba(255,255,255,0.015);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid var(--border-light);
+            backdrop-filter: blur(var(--glass-blur));
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 14px 16px;
+            background: rgba(0,0,0,0.3);
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            color: #fff;
+            font-family: inherit;
+            transition: 0.3s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            padding: 60px 0;
+            border-top: 1px solid var(--border-light);
+            background: #020203;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* --- WHATSAPP --- */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--primary);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.4);
+            z-index: 1000;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            background-color: var(--primary-dark);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 992px) {
+            h1 { font-size: 3rem; }
+            .hero-content { margin-top: 20px; }
+            .contact-wrapper { grid-template-columns: 1fr; gap: 40px; }
+            .grid-2 { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 0 20px; }
+            h1 { font-size: 2.5rem; }
+            h2 { font-size: 2rem; }
+            .section-header { margin-bottom: 40px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAV -->
+    <header id="navbar">
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">
+                    <img src="https://uploads.onecompiler.io/4474z9257/447qbhzvn/Gemini_Generated_Image_tzl9uptzl9uptzl9.png" alt="Spyral Labs">
+                    SPYRAL LABS
+                </a>
+                <a href="#contacto" class="btn btn-primary btn-sm">Contacto</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-bg-glow"></div>
+        <div class="container">
+            <div class="hero-content">
+                <span class="section-tag">Desarrollo Tech Enterprise</span>
+                <h1>Somos tu Partner de Desarrollo Blockchain</h1>
+                <p class="subtitle" style="margin: 0 auto 40px auto;">
+                    Arquitectura descentralizada, Smart Contracts auditados, Inteligencia Artificial y soluciones Web3 escalables. Construimos el futuro financiero.
+                </p>
+                <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+                    <a href="#contacto" class="btn btn-primary">Iniciar Proyecto</a>
+                    <a href="#portafolio" class="btn btn-secondary">Ver Proyectos</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CLIENTS MARQUEE (Logos) -->
+    <div class="marquee-section">
+        <div class="container" style="text-align: center; margin-bottom: 30px;">
+            <p style="font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; color: var(--text-secondary);">Empresas que confían en nosotros</p>
+        </div>
+        <div class="marquee-wrapper">
+            <div class="marquee-track">
+                <!-- Set 1 -->
+                <div class="marquee-item"><img src="https://www.bruder.com.co/wp-content/uploads/bruder-cerveceria-logo-w.png" alt="Bruder" class="client-logo-img"></div>
+                <div class="marquee-item"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Walmart_logo_%282008%29.svg/1280px-Walmart_logo_%282008%29.svg.png" alt="Walmart" class="client-logo-img"></div>
+                <div class="marquee-item"><img src="https://upload.wikimedia.org/wikipedia/en/thumb/f/f5/RedBullEnergyDrink.svg/1200px-RedBullEnergyDrink.svg.png" alt="Red Bull" class="client-logo-img"></div>
+                <div class="marquee-item"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Logo_de_Banorte.svg/2560px-Logo_de_Banorte.svg.png" alt="Banorte" class="client-logo-img"></div>
+                <div class="marquee-item"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/Citibanamex_logo.svg/2560px-Citibanamex_logo.svg.png" alt="Citibanamex" class="client-logo-img"></div>
+                <div class="marquee-item"><img src="https://upload.wikimedia.org/wikipedia/commons/5/57/UNICEF_Logo.png" alt="UNICEF" class="client-logo-img"></div>
+                <div class="marquee-item"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Caracol_Televisi%C3%B3n_logo.svg/2048px-Caracol_Televisi%C3%B3n_logo.svg.png" alt="Caracol TV" class="client-logo-img"></div>
+                <div class="marquee-item"><img src="https://upload.wikimedia.org/wikipedia/commons/c/c2/MinTIC_%28Colombia%29_logo.png" alt="MinTIC" class="client-logo-img"></div>
+                <div class="marquee-item"><img src="https://hacebco.vtexassets.com/arquivos/logo-haceb.png" alt="Haceb" class="client-logo-img"></div>
+                <div class="marquee-item"><img src="https://cms.amerins.com/uploads/hospital_san_vicente_4df837df65.png" alt="Hospital San Vicente" class="client-logo-img"></div>
+                
+                <!-- Set 2 (Duplicado para loop infinito) -->
+                <div class="marquee-item"><img src="https://www.bruder.com.co/wp-content/uploads/bruder-cerveceria-logo-w.png" alt="Bruder" class="client-logo-img"></div>
+                <div class="marquee-item"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Walmart_logo_%282008%29.svg/1280px-Walmart_logo_%282008%29.svg.png" alt="Walmart" class="client-logo-img"></div>
+                <div class="marquee-item"><img src="https://upload.wikimedia.org/wikipedia/en/thumb/f/f5/RedBullEnergyDrink.svg/1200px-RedBullEnergyDrink.svg.png" alt="Red Bull" class="client-logo-img"></div>
+                <div class="marquee-item"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Logo_de_Banorte.svg/2560px-Logo_de_Banorte.svg.png" alt="Banorte" class="client-logo-img"></div>
+                <div class="marquee-item"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/Citibanamex_logo.svg/2560px-Citibanamex_logo.svg.png" alt="Citibanamex" class="client-logo-img"></div>
+                <div class="marquee-item"><img src="https://upload.wikimedia.org/wikipedia/commons/5/57/UNICEF_Logo.png" alt="UNICEF" class="client-logo-img"></div>
+                <div class="marquee-item"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Caracol_Televisi%C3%B3n_logo.svg/2048px-Caracol_Televisi%C3%B3n_logo.svg.png" alt="Caracol TV" class="client-logo-img"></div>
+                <div class="marquee-item"><img src="https://upload.wikimedia.org/wikipedia/commons/c/c2/MinTIC_%28Colombia%29_logo.png" alt="MinTIC" class="client-logo-img"></div>
+                <div class="marquee-item"><img src="https://hacebco.vtexassets.com/arquivos/logo-haceb.png" alt="Haceb" class="client-logo-img"></div>
+                <div class="marquee-item"><img src="https://cms.amerins.com/uploads/hospital_san_vicente_4df837df65.png" alt="Hospital San Vicente" class="client-logo-img"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SERVICES (Updated List) -->
+    <section id="servicios">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Qué Hacemos</span>
+                <h2>Servicios Integrales</h2>
+                <p class="subtitle" style="margin: 0 auto;">Nos encargamos de crear desde cero tu proyecto mediante un enfoque estratégico y tecnológico.</p>
+            </div>
+            
+            <div class="grid-3">
+                <!-- 1. Tokenización RWA -->
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-coins"></i></div>
+                    <h3>Tokenización RWA</h3>
+                    <p>Desarrollamos la infraestructura necesaria para la tokenizacion de activos reales (RWA) para inmobiliaria, propiedad intelectual...</p>
+                </div>
+                <!-- 2. Desarrollo dApps -->
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-laptop-code"></i></div>
+                    <h3>Desarrollo dApps</h3>
+                    <p>Creamos dApps (aplicaciones descentralizadas) a medida, con una UX/UI única y una arquitectura de Smart Contracts eficientes.</p>
+                </div>
+                <!-- 3. Consultoría Blockchain -->
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-lightbulb"></i></div>
+                    <h3>Consultoría Blockchain</h3>
+                    <p>Asesoramiento especializado con nuestros expertos para iniciar tu proyecto basado en tecnología y desarrollo Blockchain.</p>
+                </div>
+                <!-- 4. Asesoramiento Legal -->
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-balance-scale"></i></div>
+                    <h3>Asesoramiento Legal</h3>
+                    <p>Proporcionamos orientación experta sobre el marco regulatorio aplicable a criptoactivos y tokenización de activos.</p>
+                </div>
+                <!-- 5. Auditoría Smart Contracts -->
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-shield-alt"></i></div>
+                    <h3>Auditoría Smart Contracts</h3>
+                    <p>Garantiza la seguridad y transparencia de los contratos inteligentes de tu plataforma con nuestras auditorías especializadas.</p>
+                </div>
+                <!-- 6. Desarrollo Smart Contracts -->
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-file-code"></i></div>
+                    <h3>Desarrollo Smart Contracts</h3>
+                    <p>Desarrollamos Smart Contracts en redes EVM (Ethereum, Polygon, BNB Chain, Arbitrum) con Solidity y en la red de Solana con rust.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PORTFOLIO / PROJECTS -->
+    <section id="portafolio" style="background: #000;">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Portafolio</span>
+                <h2>Proyectos Realizados</h2>
+                <p class="subtitle" style="margin: 0 auto;">Algunos casos de éxito donde hemos implementado nuestra tecnología.</p>
+            </div>
+
+            <div class="grid-3">
+                <!-- Project New: Nirvana -->
+                <div class="project-card">
+                    <div class="project-content">
+                        <span class="project-tag">REAL ESTATE / TOKENIZACIÓN</span>
+                        <h3>Nirvana Resort</h3>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 20px;">
+                            Primer resort tokenizado en Colombia. Un modelo de inversión fraccionada en turismo de lujo impulsado por tecnología blockchain.
+                        </p>
+                        <a href="https://nirvanaresort.space/" target="_blank" class="project-link">Ver Proyecto <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Project New: UNICEF -->
+                <div class="project-card">
+                    <div class="project-content">
+                        <span class="project-tag">SOCIAL IMPACT / NFT</span>
+                        <h3>UNICEF PixHelp</h3>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 20px;">
+                            Campaña solidaria Bitcoin & Blockchain. NFTs que se convierten en alimento terapéutico para combatir la desnutrición infantil en Colombia.
+                        </p>
+                        <a href="https://unicefpixhelp.xyz/" target="_blank" class="project-link">Ver Proyecto <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Project 1: CaDes -->
+                <div class="project-card">
+                    <div class="project-content">
+                        <span class="project-tag">FINTECH / CEX</span>
+                        <h3>CaDes Exchange</h3>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 20px;">
+                            Exchange centralizado (CEX) completo con motor de emparejamiento, billeteras integradas y alta seguridad.
+                        </p>
+                        <a href="https://hubmaktub.io" target="_blank" class="project-link">Ver Proyecto <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Project 2: Kuluum -->
+                <div class="project-card">
+                    <div class="project-content">
+                        <span class="project-tag">REAL ESTATE / TOKENIZACIÓN</span>
+                        <h3>KULUUM</h3>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 20px;">
+                            Plataforma de crowdfunding inmobiliario basada en cripto. Permite la compra fraccionada de lotes y monitoreo en tiempo real.
+                        </p>
+                        <a href="https://azfounders.store/kuluum" target="_blank" class="project-link">Ver Proyecto <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Project 3: AI Cancer -->
+                <div class="project-card">
+                    <div class="project-content">
+                        <span class="project-tag">HEALTHCARE / AI</span>
+                        <h3>Diagnóstico IA</h3>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 20px;">
+                            Sistema de inteligencia artificial para diagnóstico temprano de cáncer mediante análisis de imágenes médicas (Computer Vision).
+                        </p>
+                        <span class="project-link" style="opacity:0.6; cursor:default;">Desarrollo Privado</span>
+                    </div>
+                </div>
+
+                <!-- Project 4: RedBull -->
+                <div class="project-card">
+                    <div class="project-content">
+                        <span class="project-tag">BRAND EXPERIENCE</span>
+                        <h3>Red Bull Le Mans</h3>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 20px;">
+                            Plataforma web interactiva e inmersiva para el Challenge automovilístico de Red Bull en las 24 horas de Le Mans.
+                        </p>
+                        <a href="https://azfounders.store/redbull/" target="_blank" class="project-link">Ver Proyecto <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Project 5: Walmart -->
+                <div class="project-card">
+                    <div class="project-content">
+                        <span class="project-tag">E-LEARNING / CORPORATE</span>
+                        <h3>Walmart Training</h3>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 20px;">
+                            Plataforma de aprendizaje gamificado para capacitar a empleados del grupo Walmart en operaciones y cultura.
+                        </p>
+                        <a href="https://azfounders.store/walmart/walmart/" target="_blank" class="project-link">Ver Proyecto <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Project 6: Blockpay -->
+                <div class="project-card">
+                    <div class="project-content">
+                        <span class="project-tag">BANKING / DEFI</span>
+                        <h3>BLOCKPAY</h3>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 20px;">
+                            Solución bancaria de segundo piso con backoffice completo para operaciones financieras y control de usuarios.
+                        </p>
+                        <a href="https://account.blockpay.network/" target="_blank" class="project-link">Ver Proyecto <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                 <!-- Project 7: NGOLD -->
+                 <div class="project-card">
+                    <div class="project-content">
+                        <span class="project-tag">RWA / GOLD</span>
+                        <h3>NGOLD</h3>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 20px;">
+                            Solución de tokenización de oro físico. Compra, venta y transferencia de fracciones de oro mediante Smart Contracts.
+                        </p>
+                        <a href="https://ngold.io/" target="_blank" class="project-link">Ver Proyecto <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Project 8: Banorte -->
+                <div class="project-card">
+                    <div class="project-content">
+                        <span class="project-tag">BANKING / SECURITY</span>
+                        <h3>Banorte Learning</h3>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 20px;">
+                            Plataforma personalizada de capacitación interna sobre seguridad de datos y atención al cliente.
+                        </p>
+                        <a href="https://azfounders.store/bancos/banorte/1-ca/ca.html" target="_blank" class="project-link">Ver Proyecto <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Project 9: Artica -->
+                <div class="project-card">
+                    <div class="project-content">
+                        <span class="project-tag">NFT MARKETPLACE</span>
+                        <h3>ARTICA</h3>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 20px;">
+                            Marketplace de arte digital con autenticación blockchain para artistas y coleccionistas.
+                        </p>
+                        <a href="https://artica.mx" target="_blank" class="project-link">Ver Proyecto <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 50px;">
+                <a href="#contacto" class="btn btn-secondary">Ver Más Casos de Éxito</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- TECH STACK MARQUEE -->
+    <div class="marquee-section" style="background: #050507;">
+        <div class="container" style="text-align: center; margin-bottom: 30px;">
+            <p style="font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; color: var(--text-secondary);">Stack Tecnológico</p>
+        </div>
+        <div class="marquee-wrapper">
+            <div class="marquee-track" style="animation-direction: reverse;">
+                <!-- Set 1 -->
+                <div class="marquee-item"><img src="https://cryptologos.cc/logos/ethereum-eth-logo.png" alt="Ethereum" class="client-logo-img"></div>
+                <div class="marquee-item"><img src="https://cryptologos.cc/logos/solana-sol-logo.png" alt="Solana" class="client-logo-img"></div>
+                <div class="marquee-item"><img src="https://blockchainespana.com/wp-content/uploads/2018/02/hyperledger_logo_new.png" alt="Hyperledger" class="client-logo-img" style="filter: invert(1);"></div>
+                <div class="marquee-item"><img src="https://upload.wikimedia.org/wikipedia/commons/2/24/Polygon_blockchain_logo.png" alt="Polygon" class="client-logo-img"></div>
+                <div class="marquee-item"><img src="https://es.coingape.com/wp-content/uploads/2021/10/arbitrum_logo.1a8b7e63.png" alt="Arbitrum" class="client-logo-img"></div>
+                <div class="marquee-item"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Tether_Logo.svg/2560px-Tether_Logo.svg.png" alt="Tether" class="client-logo-img"></div>
+                <div class="marquee-item"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Circle_USDC_Logo.svg/2048px-Circle_USDC_Logo.svg.png" alt="USDC" class="client-logo-img"></div>
+                <div class="marquee-item"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Ripple_logo.svg/2560px-Ripple_logo.svg.png" alt="Ripple" class="client-logo-img"></div>
+                <div class="marquee-item"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Rust_programming_language_black_logo.svg/1024px-Rust_programming_language_black_logo.svg.png" alt="Rust" class="client-logo-img" style="filter: invert(1);"></div>
+                <div class="marquee-item"><img src="https://upload.wikimedia.org/wikipedia/commons/9/98/Solidity_logo.svg" alt="Solidity" class="client-logo-img"></div>
+                <div class="marquee-item"><img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg" alt="Python" class="client-logo-img"></div>
+                <div class="marquee-item"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" alt="React" class="client-logo-img"></div>
+                
+                <!-- Set 2 (Duplicado para loop infinito) -->
+                <div class="marquee-item"><img src="https://cryptologos.cc/logos/ethereum-eth-logo.png" alt="Ethereum" class="client-logo-img"></div>
+                <div class="marquee-item"><img src="https://cryptologos.cc/logos/solana-sol-logo.png" alt="Solana" class="client-logo-img"></div>
+                <div class="marquee-item"><img src="https://blockchainespana.com/wp-content/uploads/2018/02/hyperledger_logo_new.png" alt="Hyperledger" class="client-logo-img" style="filter: invert(1);"></div>
+                <div class="marquee-item"><img src="https://upload.wikimedia.org/wikipedia/commons/2/24/Polygon_blockchain_logo.png" alt="Polygon" class="client-logo-img"></div>
+                <div class="marquee-item"><img src="https://es.coingape.com/wp-content/uploads/2021/10/arbitrum_logo.1a8b7e63.png" alt="Arbitrum" class="client-logo-img"></div>
+                <div class="marquee-item"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Tether_Logo.svg/2560px-Tether_Logo.svg.png" alt="Tether" class="client-logo-img"></div>
+                <div class="marquee-item"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Circle_USDC_Logo.svg/2048px-Circle_USDC_Logo.svg.png" alt="USDC" class="client-logo-img"></div>
+                <div class="marquee-item"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Ripple_logo.svg/2560px-Ripple_logo.svg.png" alt="Ripple" class="client-logo-img"></div>
+                <div class="marquee-item"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Rust_programming_language_black_logo.svg/1024px-Rust_programming_language_black_logo.svg.png" alt="Rust" class="client-logo-img" style="filter: invert(1);"></div>
+                <div class="marquee-item"><img src="https://upload.wikimedia.org/wikipedia/commons/9/98/Solidity_logo.svg" alt="Solidity" class="client-logo-img"></div>
+                <div class="marquee-item"><img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg" alt="Python" class="client-logo-img"></div>
+                <div class="marquee-item"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" alt="React" class="client-logo-img"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TEAM SECTION (AGREGADO) -->
+    <section id="equipo">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Equipo</span>
+                <h2>Leadership</h2>
+            </div>
+            <div class="team-grid">
+                <!-- Camilo -->
+                <div class="team-card">
+                    <img src="https://media.licdn.com/dms/image/v2/D4E03AQF9eTSy1tM3-Q/profile-displayphoto-crop_800_800/B4EZfXi62rGcAI-/0/1751667949450?e=1767225600&v=beta&t=Nm98DjTDz3UgcjHqMYVKvc36Zt2W5P7MEAOB3EroRUE" alt="Camilo Romero" class="team-avatar">
+                    <h4 class="team-name">Camilo Romero</h4>
+                    <span class="team-role">CEO & Founder</span>
+                    <a href="https://www.linkedin.com/in/camilo-romero-molano-6037a590/" target="_blank" class="linkedin-link"><i class="fab fa-linkedin"></i></a>
+                </div>
+                <!-- Santiago -->
+                <div class="team-card">
+                    <img src="https://media.licdn.com/dms/image/v2/D4E03AQGRW82tx2fNlw/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1727650574804?e=1767225600&v=beta&t=sVySakUXLZcvKr_HMrsoBQGRmzcOn4yuZNWkfgylR3Q" alt="Santiago Cortes" class="team-avatar">
+                    <h4 class="team-name">Santiago Cortes</h4>
+                    <span class="team-role">COO & Founder</span>
+                    <a href="https://www.linkedin.com/in/santiago-cort%C3%A9s-alarc%C3%B3n-239b15157/" target="_blank" class="linkedin-link"><i class="fab fa-linkedin"></i></a>
+                </div>
+                <!-- Jose -->
+                <div class="team-card">
+                    <img src="https://ui-avatars.com/api/?name=Jose+Juarez&background=0f1016&color=fff&size=200" alt="Jose Juarez" class="team-avatar">
+                    <h4 class="team-name">José Juárez</h4>
+                    <span class="team-role">CTO</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contacto" class="contact-section">
+        <div class="container">
+            <div class="contact-wrapper">
+                <div class="contact-info">
+                    <span class="section-tag">Hablemos</span>
+                    <h2>Construyamos el Futuro.</h2>
+                    <p class="subtitle">
+                        ¿Tienes un proyecto en mente? Nuestro equipo técnico analizará tu requerimiento y te responderá en menos de 24 horas.
+                    </p>
+                    <div style="margin-top: 30px;">
+                        <p style="color: #fff; font-weight: 600;">Email</p>
+                        <p style="color: var(--text-secondary);">info@spyral-labs.xyz</p>
+                    </div>
+                </div>
+
+                <div class="form-box">
+                    <form onsubmit="event.preventDefault(); alert('Mensaje enviado. El equipo de Spyral Labs te contactará pronto.');">
+                        <div class="input-group">
+                            <label>Nombre</label>
+                            <input type="text" class="form-control" placeholder="Tu nombre" required>
+                        </div>
+                        <div class="input-group">
+                            <label>Email</label>
+                            <input type="email" class="form-control" placeholder="nombre@empresa.com" required>
+                        </div>
+                        <div class="input-group">
+                            <label>Mensaje</label>
+                            <textarea class="form-control" rows="4" placeholder="Detalles del proyecto..." required></textarea>
+                        </div>
+                        <div style="display:flex; gap:10px; margin-bottom:20px; align-items:center;">
+                            <input type="checkbox" id="privacy" required accent-color="var(--primary)">
+                            <label for="privacy" style="font-size:0.85rem; color:var(--text-secondary); margin:0;">Acepto políticas de privacidad</label>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">Enviar Solicitud</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">
+                <div class="logo" style="font-size: 1rem;">
+                    <img src="https://uploads.onecompiler.io/4474z9257/447qbhzvn/Gemini_Generated_Image_tzl9uptzl9uptzl9.png" alt="Spyral Labs" style="height: 35px; width: auto; margin-right: 10px; border-radius: 6px;">
+                    SPYRAL LABS
+                </div>
+                <div>
+                    <p>&copy; 2025 Spyral Labs. Todos los derechos reservados.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Button -->
+    <a href="https://wa.link/40k4ms" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Navbar Scroll Script -->
+    <script>
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>
