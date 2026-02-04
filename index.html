@@ -378,7 +378,6 @@
 
         .project-tag {
             font-size: 0.75rem;
-            /* CAMBIO: Color verde eliminado, ahora usa el color primario (púrpura/indigo) */
             color: var(--primary); 
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -409,6 +408,7 @@
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
             margin-top: 20px;
+            justify-content: center; /* Centrar elementos si hay pocos */
         }
 
         .team-card {
@@ -471,46 +471,11 @@
         }
 
         .contact-wrapper {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 80px;
+            display: flex;
+            flex-direction: column;
             align-items: center;
-        }
-
-        .form-box {
-            background: rgba(255,255,255,0.015);
-            padding: 40px;
-            border-radius: 20px;
-            border: 1px solid var(--border-light);
-            backdrop-filter: blur(var(--glass-blur));
-        }
-
-        .input-group {
-            margin-bottom: 20px;
-        }
-
-        .input-group label {
-            display: block;
-            margin-bottom: 8px;
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 14px 16px;
-            background: rgba(0,0,0,0.3);
-            border: 1px solid var(--border-light);
-            border-radius: 8px;
-            color: #fff;
-            font-family: inherit;
-            transition: 0.3s;
-        }
-
-        .form-control:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+            gap: 40px;
+            text-align: center;
         }
 
         /* --- FOOTER --- */
@@ -551,7 +516,6 @@
         @media (max-width: 992px) {
             h1 { font-size: 3rem; }
             .hero-content { margin-top: 20px; }
-            .contact-wrapper { grid-template-columns: 1fr; gap: 40px; }
             .grid-2 { grid-template-columns: 1fr; }
         }
 
@@ -573,7 +537,7 @@
                     <img src="https://uploads.onecompiler.io/4474z9257/447qbhzvn/Gemini_Generated_Image_tzl9uptzl9uptzl9.png" alt="Spyral Labs">
                     SPYRAL LABS
                 </a>
-                <a href="#contacto" class="btn btn-primary btn-sm">Contacto</a>
+                <a href="#agendar" class="btn btn-primary btn-sm">Agendar Cita</a>
             </nav>
         </div>
     </header>
@@ -589,7 +553,7 @@
                     Arquitectura descentralizada, Smart Contracts auditados, Inteligencia Artificial y soluciones Web3 escalables. Construimos el futuro financiero.
                 </p>
                 <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
-                    <a href="#contacto" class="btn btn-primary">Iniciar Proyecto</a>
+                    <a href="#agendar" class="btn btn-primary">Agendar Cita</a>
                     <a href="#portafolio" class="btn btn-secondary">Ver Proyectos</a>
                 </div>
             </div>
@@ -876,21 +840,14 @@
             <div class="team-grid">
                 <!-- Camilo -->
                 <div class="team-card">
-                    <img src="https://media.licdn.com/dms/image/v2/D4E03AQF9eTSy1tM3-Q/profile-displayphoto-crop_800_800/B4EZfXi62rGcAI-/0/1751667949450?e=1767225600&v=beta&t=Nm98DjTDz3UgcjHqMYVKvc36Zt2W5P7MEAOB3EroRUE" alt="Camilo Romero" class="team-avatar">
+                    <img src="https://media.licdn.com/dms/image/v2/D4E03AQF9eTSy1tM3-Q/profile-displayphoto-scale_400_400/B4EZfXi62rGcAg-/0/1751667949534?e=1771459200&v=beta&t=9ecfTznYRd0BIxDlOLjDk_f61dxQNqHEcLPTTdoNgao" alt="Camilo Romero" class="team-avatar">
                     <h4 class="team-name">Camilo Romero</h4>
                     <span class="team-role">CEO & Founder</span>
                     <a href="https://www.linkedin.com/in/camilo-romero-molano-6037a590/" target="_blank" class="linkedin-link"><i class="fab fa-linkedin"></i></a>
                 </div>
-                <!-- Santiago -->
-                <div class="team-card">
-                    <img src="https://media.licdn.com/dms/image/v2/D4E03AQGRW82tx2fNlw/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1727650574804?e=1767225600&v=beta&t=sVySakUXLZcvKr_HMrsoBQGRmzcOn4yuZNWkfgylR3Q" alt="Santiago Cortes" class="team-avatar">
-                    <h4 class="team-name">Santiago Cortes</h4>
-                    <span class="team-role">COO & Founder</span>
-                    <a href="https://www.linkedin.com/in/santiago-cort%C3%A9s-alarc%C3%B3n-239b15157/" target="_blank" class="linkedin-link"><i class="fab fa-linkedin"></i></a>
-                </div>
                 <!-- Jose -->
                 <div class="team-card">
-                    <img src="https://ui-avatars.com/api/?name=Jose+Juarez&background=0f1016&color=fff&size=200" alt="Jose Juarez" class="team-avatar">
+                    <img src="https://media.licdn.com/dms/image/v2/D4E03AQGlpwwSJZ0-dQ/profile-displayphoto-shrink_800_800/B4EZtNgHCmGcAg-/0/1766531822513?e=1771459200&v=beta&t=aVTvXcGv-W5kTuxgN_rIUQGcObSFZNkh_c3_97aPu8Y" alt="Jose Juarez" class="team-avatar">
                     <h4 class="team-name">José Juárez</h4>
                     <span class="team-role">CTO</span>
                 </div>
@@ -898,43 +855,20 @@
         </div>
     </section>
 
-    <!-- CONTACT -->
-    <section id="contacto" class="contact-section">
+    <!-- CALENDLY SECTION (AGREGADO) -->
+    <section id="agendar" class="contact-section">
         <div class="container">
-            <div class="contact-wrapper">
-                <div class="contact-info">
-                    <span class="section-tag">Hablemos</span>
-                    <h2>Construyamos el Futuro.</h2>
-                    <p class="subtitle">
-                        ¿Tienes un proyecto en mente? Nuestro equipo técnico analizará tu requerimiento y te responderá en menos de 24 horas.
-                    </p>
-                    <div style="margin-top: 30px;">
-                        <p style="color: #fff; font-weight: 600;">Email</p>
-                        <p style="color: var(--text-secondary);">info@spyral-labs.xyz</p>
-                    </div>
-                </div>
-
-                <div class="form-box">
-                    <form onsubmit="event.preventDefault(); alert('Mensaje enviado. El equipo de Spyral Labs te contactará pronto.');">
-                        <div class="input-group">
-                            <label>Nombre</label>
-                            <input type="text" class="form-control" placeholder="Tu nombre" required>
-                        </div>
-                        <div class="input-group">
-                            <label>Email</label>
-                            <input type="email" class="form-control" placeholder="nombre@empresa.com" required>
-                        </div>
-                        <div class="input-group">
-                            <label>Mensaje</label>
-                            <textarea class="form-control" rows="4" placeholder="Detalles del proyecto..." required></textarea>
-                        </div>
-                        <div style="display:flex; gap:10px; margin-bottom:20px; align-items:center;">
-                            <input type="checkbox" id="privacy" required accent-color="var(--primary)">
-                            <label for="privacy" style="font-size:0.85rem; color:var(--text-secondary); margin:0;">Acepto políticas de privacidad</label>
-                        </div>
-                        <button type="submit" class="btn btn-primary" style="width: 100%;">Enviar Solicitud</button>
-                    </form>
-                </div>
+            <div class="section-header">
+                <span class="section-tag">Hablemos</span>
+                <h2>Agenda tu Cita</h2>
+                <p class="subtitle" style="margin: 0 auto;">Selecciona un horario disponible para conversar sobre tu proyecto.</p>
+            </div>
+            
+            <div style="display: flex; justify-content: center; width: 100%;">
+                <!-- Calendly inline widget begin -->
+                <div class="calendly-inline-widget" data-url="https://calendly.com/camilo-romero321/30min?hide_landing_page_details=1&hide_gdpr_banner=1&background_color=0f1016&text_color=ffffff&primary_color=6366f1" style="min-width:320px;height:700px;width:100%;max-width:1000px;border:1px solid rgba(255,255,255,0.1);border-radius:12px;overflow:hidden;"></div>
+                <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+                <!-- Calendly inline widget end -->
             </div>
         </div>
     </section>
